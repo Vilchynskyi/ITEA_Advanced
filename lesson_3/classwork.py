@@ -1,4 +1,5 @@
 import urllib.request
+import time
 
 
 if __name__ == '__main__':
@@ -6,7 +7,10 @@ if __name__ == '__main__':
         def actual_decorator(func):
             def wrapper(url):
                 for i in range(numbers_of_repeats):
+                    current_time = time.time()
                     result = func(url)
+                    print('Processing time was -',
+                          str(time.time() - current_time))
                 return result
             return wrapper
         return actual_decorator
