@@ -52,7 +52,7 @@ if __name__ == '__main__':
             return result, result1, result2
 
     first_dot = Dot(1, 2, 3)
-    second_dot = Dot(1, 2, 3)
+    second_dot = Dot(2, 4, 6)
 
     print('+', first_dot + second_dot)
     print('-', first_dot - second_dot)
