@@ -3,19 +3,25 @@ import random
 import time
 
 
-def actual_decorator(func):
-    def wrapper(*args):
-        thread = Thread(target=func, args=args)
-        thread.start()
-    return wrapper
+def decorator(thread_name, number_of_threads=1):
+    def actual_decorator(func):
+        def wrapper():
+            temp_var = 1
+            for thread in range(number_of_threads):
+                thread = Thread(target=func,
+                               args=(2, thread_name + str(temp_var)))
+                thread.start()
+                temp_var += 1
+        return wrapper
+    return actual_decorator
 
 
-@actual_decorator
-def thread_func(num, name):
+@decorator('MyThreadName', number_of_threads=3)
+def thread_func(num, thread_name):
     for i in range(num):
         time.sleep(random.randint(0, 1))
-        print(f'I am executing from {name}')
-    print(f'The end of {name}')
+        print(f'I am executing from {thread_name}')
+    print(f'The end of {thread_name}')
 
 
-thread_func(3, 'thread')
+thread_func()
